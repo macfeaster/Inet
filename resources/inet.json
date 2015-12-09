@@ -1,0 +1,201 @@
+{
+    "languages": {
+        "en-US": {
+            "name": "English (United States)",
+            "available": "Available commands"
+        },
+        "sv-SE": {
+            "name": "Svenska (Sverige)",
+            "available": "Tillgänliga kommandon"
+        },
+        "sk-SU": {
+            "name": "Skäunska (Skäune)",
+            "available": "Såunt man kan säija"
+        }
+    },
+    "commands": [
+        {
+            "id": 1,
+            "name": {
+                "en-US": "login",
+                "sv-SE": "loggain",
+                "sk-SU": "louggäin"
+            },
+            "help": {
+                "en-US": "Log on to the bank",
+                "sv-SE": "Logga in på banken",
+                "sk-SU": "Louggä in peo bänkän"
+            },
+            "data": {
+                "en-US": "Credit Card Number (16 digits)",
+                "sv-SE": "Kortnummer (16 siffror)",
+                "sk-SU": "Di där krumileurerna peo kourtet (16 ska di va!)"
+            },
+            "code": {
+                "en-US": "Security Code",
+                "sv-SE": "Säkerhetskod",
+                "sk-SU": "Säkerrrheitskoudän"
+            }
+        },
+        {
+            "id": 2,
+            "name": {
+                "en-US": "logout",
+                "sv-SE": "loggaut",
+                "sk-SU": "louggäeut",
+            },
+            "help": {
+                "en-US": "Log out from the bank",
+                "sv-SE": "Logga ut från banken",
+                "sk-SU": "Louggä eut fraun bänkän"
+            },
+            "data": false,
+            "code": false
+        },
+        {
+            "id": 3,
+            "name": {
+                "en-US": "balance",
+                "sv-SE": "saldo",
+                "sk-SU": "tillgoudouhauvande"
+            },
+            "help": {
+                "en-US": "Check the current balance of your account",
+                "sv-SE": "Se nuvarande kontosaldo",
+                "sk-SU": "Koulla heur myckit peingar deu haur uti spaurbyssen"
+            },
+            "data": false,
+            "code": false
+        },
+        {
+            "id": 4,
+            "name": {
+                "en-US": "withdraw",
+                "sv-SE": "uttag",
+                "sk-SU": "äuttaug"
+            },
+            "help": {
+                "en-US": "Withdraw cash from your account",
+                "sv-SE": "Tag ut pengar från ditt konto",
+                "sk-SU": "Skauka ur peingar fraun spaurbyssen"
+            },
+            "data": {
+                "en-US": "Amount to withdraw",
+                "sv-SE": "Belopp att ta ut",
+                "sk-SU": "Heur myckit skau deu ha?"
+            },
+            "code": {
+                "en-US": "Security Code",
+                "sv-SE": "Säkerhetskod",
+                "sk-SU": "Säkerrrheitskoudän"
+            }
+        },
+        {
+            "id": 5,
+            "name": {
+                "en-US": "deposit",
+                "sv-SE": "sättin",
+                "sk-SU": "spaure"
+            },
+            "help": {
+                "en-US": "Make a deposit",
+                "sv-SE": "Sätt in pengar",
+                "sk-SU": "Laegg ei peingar ei spaurbyssen"
+            },
+            "data": {
+                "en-US": "Amount to deposit",
+                "sv-SE": "Summa att sätta in",
+                "sk-SU": "Heur myckit veill deu sätti inn?"
+            },
+            "code": false
+        },
+        {
+            "id": 6,
+            "name": {
+                "en-US": "stock",
+                "sv-SE": "börsen",
+                "sk-SU": "spettekake",
+            },
+            "help": {
+                "en-US": "View today's stock market result",
+                "sv-SE": "Se dagens börsresultat",
+                "sk-SU": "Titte peo daugens spettekake-preiser"
+            },
+            "data": false,
+            "code": false
+        }],
+        "responses": [
+        {
+            "id": 80,
+            "text": {
+                "en-US": "Invalid command sent to server",
+                "sv-SE": "Ogiltig förfrågan skickad till servern",
+                "sk-SU": "Nä neu fattarr einte dautan ett jeota!"
+            }
+        },
+        {
+            "id": 81,
+            "text": {
+                "en-US": "The credit card number supplied was invalid",
+                "sv-SE": "Det angivna kortnumret är ogiltigt",
+                "sk-SU": "Di måuste vau nåut feil mäid krumileurerna peo kourtet"
+            }
+        },
+        {
+            "id": 82,
+            "text": {
+                "en-US": "Invalid security code",
+                "sv-SE": "Ogiltig säkerhetskod",
+                "sk-SU": "Säkerrrheitskoudän vaur fel."
+            }
+        },
+        {
+            "id": 83,
+            "text": {
+                "en-US": "Insufficient funds",
+                "sv-SE": "Uttag medges ej",
+                "sk-SU": "ÅH NAJ! INGAE SPETTEKAUKOUR I SPAURBYSSEN!"
+            }
+        },
+        {
+            "id": 100,
+            "text": {
+                "en-US": "Welcome to The Capitalist Bank!",
+                "sv-SE": "Välkommen till folkhemmets bank!",
+                "sk-SU": "Veilkoummen till Skeunske Bank!"
+            }
+        },
+        {
+            "id": 101,
+            "text": {
+                "en-US": "Your account contains ${0}.00",
+                "sv-SE": "Ditt kontosaldo: {0} riksdaler. FÖR SVERIGE I TIDEN.",
+                "sk-SU": "Deu haur {0} spettekaukour i spaurbyssen."
+            }
+        },
+        {
+            "id": 102,
+            "text": {
+                "en-US": "Withdrawal successful! Your account now contains ${0}.00",
+                "sv-SE": "Uttag utfört. Ditt saldo är nu {0} riksdaler.",
+                "sk-SU": "Nu haur däu foutt dine spettekaukour. Däu haur {0} kvaur. "
+            }
+        },
+        {
+            "id": 103,
+            "text": {
+                "en-US": "Deposit successful! Your account now contains ${0}.00",
+                "sv-SE": "Insättning utförd. Ditt saldo är nu {0} riksdaler.",
+                "sk-SU": "Dåu var deit klarrt! Deu haur {0} spettekaukour."
+            }
+        },
+        {
+            "id": 104,
+            "text": {
+                "en-US": "Stock market changes today: -{0}%",
+                "sv-SE": "Dagens börsresultat: -{0}%. Göran Greider förutspår undergången till nästa torsdag. Läs mer på Aftonbladet Plus.",
+                "sk-SU": "Däitte haur hint meid daugens spettekake-preiser: {0} pærør"
+            }
+        }
+        ]
+}
