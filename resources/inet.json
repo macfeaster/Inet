@@ -42,7 +42,7 @@
             "name": {
                 "en-US": "logout",
                 "sv-SE": "loggaut",
-                "sk-SU": "louggäeut",
+                "sk-SU": "louggäeut"
             },
             "help": {
                 "en-US": "Log out from the bank",
@@ -114,7 +114,7 @@
             "name": {
                 "en-US": "stock",
                 "sv-SE": "börsen",
-                "sk-SU": "spettekake",
+                "sk-SU": "spettekake"
             },
             "help": {
                 "en-US": "View today's stock market result",

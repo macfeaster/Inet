@@ -23,17 +23,40 @@ public class Handle implements Runnable
 	}
 
 	@Override
-	public void run()
-	{
-		try
-		{
+	public void run() {
+		try {
 			// Set up a Stream to provide a response to a client
 			PrintStream out = new PrintStream(server.getOutputStream());
+			int res;
 
-			// As long as request data is received, assign a new Worker
-			// to it, and send back a response
+			// Receive 1 command byte
+			byte[] command = new byte[1];
+			res = server.getInputStream().read(command);
 
-			byte[] command = new byte[10];
+			if (res != 1) {
+				logger.error("Malformed bytes received: " + res + " bytes - " + Arrays.toString(command));
+				return;
+			}
+
+			// Receive 7 data bytes
+			byte[] data = new byte[7];
+			res = server.getInputStream().read(data);
+
+			if (res != 1) {
+				logger.error("Malformed bytes received: " + res + " bytes - " + Arrays.toString(data));
+				return;
+			}
+
+			// Receive 7 data bytes
+			byte[] data = new byte[1];
+			res = server.getInputStream().read(data);
+
+			if (res != 1) {
+				logger.error("Malformed bytes received: " + res + " bytes - " + Arrays.toString(data));
+				return;
+			}
+
+			byte[] data = new byte[7];
 
 			int res = server.getInputStream().read(command);
 
