@@ -14,6 +14,18 @@ public class Instruction
 	byte identifier;
 
 	/**
+	 * Construct an response command without data
+	 *
+	 * @param command           1 byte command
+	 */
+	public Instruction(byte command)
+	{
+		this.command = command;
+		code = 0;
+		identifier = 0;
+	}
+
+	/**
 	 * Construct an command with only data
 	 *
 	 * @param command           1 byte command
@@ -87,5 +99,20 @@ public class Instruction
 		buffer.put(bytes);
 		buffer.flip();
 		return buffer.getLong();
+	}
+
+	public byte getCode()
+	{
+		return code;
+	}
+
+	public byte getIdentifier()
+	{
+		return identifier;
+	}
+
+	public long getData()
+	{
+		return bytesToLong(data);
 	}
 }
