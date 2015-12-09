@@ -1,8 +1,16 @@
 package ATMServer;
 
-/**
- * Created by mauritz on 12/9/15.
- */
+import ATMServer.engine.Server;
+
 public class Bootstrap
 {
+	public static void main(String[] args)
+	{
+		Server
+				.createInstance()
+				.readData()
+				.parseData()
+				.openConnection()
+				.registerHandlers();
+	}
 }

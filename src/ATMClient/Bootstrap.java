@@ -1,8 +1,9 @@
 package ATMClient;
 
-/**
- * Created by mauritz on 12/9/15.
- */
 public class Bootstrap
 {
+	public static void main(String[] args)
+	{
+
+	}
 }
