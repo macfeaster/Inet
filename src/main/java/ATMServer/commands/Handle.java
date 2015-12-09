@@ -22,7 +22,6 @@ public class Handle implements Runnable
 		this.server = server;
 	}
 
-	@Override
 	public void run() {
 		try {
 			// Set up a Stream to provide a response to a client
@@ -30,9 +29,10 @@ public class Handle implements Runnable
 			int res;
 
 			// Receive 1 command byte
+			// If the number of bytes received was not exactly one,
+			// we have received malformed input
 			byte[] command = new byte[1];
 			res = server.getInputStream().read(command);
-
 			if (res != 1) {
 				logger.error("Malformed bytes received: " + res + " bytes - " + Arrays.toString(command));
 				return;
@@ -41,30 +41,24 @@ public class Handle implements Runnable
 			// Receive 7 data bytes
 			byte[] data = new byte[7];
 			res = server.getInputStream().read(data);
-
-			if (res != 1) {
+			if (res != 7) {
 				logger.error("Malformed bytes received: " + res + " bytes - " + Arrays.toString(data));
 				return;
 			}
 
-			// Receive 7 data bytes
-			byte[] data = new byte[1];
-			res = server.getInputStream().read(data);
-
+			// Receive 1 code byte
+			byte[] code = new byte[1];
+			res = server.getInputStream().read(code);
 			if (res != 1) {
-				logger.error("Malformed bytes received: " + res + " bytes - " + Arrays.toString(data));
+				logger.error("Malformed bytes received: " + res + " bytes - " + Arrays.toString(code));
 				return;
 			}
 
-			byte[] data = new byte[7];
-
-			int res = server.getInputStream().read(command);
-
-			// If the number of bytes received was not exactly ten,
-			// we have received malformed input
-			if (res != 0)
-			{
-				logger.error("Malformed bytes received: " + res + " bytes - " + Arrays.toString(command));
+			// Receive 1 identifier byte
+			byte[] identifier = new byte[1];
+			res = server.getInputStream().read(identifier);
+			if (res != 1) {
+				logger.error("Malformed bytes received: " + res + " bytes - " + Arrays.toString(identifier));
 				return;
 			}
 
