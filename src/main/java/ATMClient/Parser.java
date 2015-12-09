@@ -32,16 +32,13 @@ public class Parser {
            // Parse all language options
             while (command.keys().hasNext()) {
 
-                // Retrieve the key
+                // Retrieve the langKey
                 String langKey = command.keys().next();
 
                 // Special parse case for "id"
-                if (langKey.equals("id")) {
-                    continue;
-                }
+                if (langKey.equals("id")) continue;
 
-                // If there is no root command map for language key
-                // (for example "en-US", create it
+                // If language map has not yet been instantiated, do so
                 if (!rootMap.containsKey(langKey)) {
                     rootMap.put(langKey, new HashMap<>());
                 }
@@ -63,4 +60,37 @@ public class Parser {
         }
         return rootMap;
     }
+
+    public static HashMap<String, HashMap<Integer, String>> responses(String file) {
+
+        // Map containing all the root command maps for each language
+        HashMap<String, HashMap<Integer, String>> map = new HashMap<>();
+
+        // responses contains each response object
+        JSONArray responses = new JSONObject(file).getJSONArray("responses");
+
+        for(Object r : responses) {
+            JSONObject response = (JSONObject) r;
+
+            while (response.keys().hasNext()) {
+
+                // Retrieve the langKey
+                String langKey = response.keys().next();
+
+                // Special parse case for "id"
+                if (langKey.equals("id")) continue;
+
+                // If language map has not yet been instantiated, do so
+                if (!map.containsKey(langKey)) {
+                    map.put(langKey, new HashMap<>());
+                }
+
+                // Put response in map in map
+                map.get(langKey).put(response.getInt("id"), response.getString("text"));
+            }
+        }
+        return map;
+    }
+
+    
 }
