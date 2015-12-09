@@ -3,72 +3,73 @@ package ATMServer.data;
 import java.nio.ByteBuffer;
 
 /**
- * Represents a ten byte instruction for transmission over a network socket
+ * Represents a ten byte command for transmission over a network socket
  */
+@SuppressWarnings("unused")
 public class Instruction
 {
-	byte instruction;
+	byte command;
 	byte[] data = new byte[7];
 	byte code;
 	byte identifier;
 
 	/**
-	 * Construct an instruction with only data
+	 * Construct an command with only data
 	 *
-	 * @param instruction       1 byte instruction
+	 * @param command           1 byte command
 	 * @param data              7 byte data
 	 */
-	public Instruction(byte instruction, long data)
+	public Instruction(byte command, long data)
 	{
-		this.instruction = instruction;
+		this.command = command;
 		this.data = longToBytes(data);
 		code = 0;
 		identifier = 0;
 	}
 
 	/**
-	 * Construct a signed instruction with only data
+	 * Construct a signed command with only data
 	 *
-	 * @param instruction       1 byte instruction
+	 * @param command           1 byte command
 	 * @param data              7 byte data
 	 * @param identifier        1 byte ATM machine identifier
 	 */
-	public Instruction(byte instruction, long data, byte identifier)
+	public Instruction(byte command, long data, byte identifier)
 	{
-		this.instruction = instruction;
+		this.command = command;
 		this.data = longToBytes(data);
 		code = 0;
 		this.identifier = identifier;
 	}
 
 	/**
-	 * Construct a signed instruction using raw data and a security code
+	 * Construct a signed command using raw data and a security code
 	 *
-	 * @param instruction       1 byte instruction
+	 * @param command           1 byte command
 	 * @param data              7 byte data
 	 * @param code              1 byte security code
 	 * @param identifier        1 byte ATM machine identifier
 	 */
-	public Instruction(byte instruction, long data, byte code, byte identifier)
+	public Instruction(byte command, long data, byte code, byte identifier)
 	{
-		this.instruction = instruction;
+		this.command = command;
 		this.data = longToBytes(data);
 		this.code = code;
 		this.identifier = identifier;
 	}
 
 	/**
-	 * Construct a signed instruction using raw data and a security code
+	 * Construct a signed command using raw data and a security code
 	 */
-	public Instruction(byte instruction, byte[] data, byte code, byte identifier)
+	public Instruction(byte command, byte[] data, byte code, byte identifier)
 	{
-		this.instruction = instruction;
+		this.command = command;
 		this.data = data;
 		this.code = code;
 		this.identifier = identifier;
 	}
 
-	public byte[] longToBytes(long x) {
+	private byte[] longToBytes(long x) {
 		ByteBuffer buffer = ByteBuffer.allocate(8);
 		buffer.putLong(x);
 
@@ -80,7 +81,7 @@ public class Instruction
 		return res;
 	}
 
-	public long bytesToLong(byte[] bytes) {
+	private long bytesToLong(byte[] bytes) {
 		ByteBuffer buffer = ByteBuffer.allocate(8);
 		buffer.put((byte) 0);
 		buffer.put(bytes);

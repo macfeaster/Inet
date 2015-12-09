@@ -1,7 +1,9 @@
-package ATMServer.engine;
+package ATMServer;
 
 import ATMServer.ATM.Bank;
 import ATMServer.ATM.Functions;
+import ATMServer.data.Instruction;
+import ATMServer.util.InstructionParser;
 import ATMServer.util.Logger;
 
 import java.io.IOException;
@@ -20,7 +22,7 @@ public class Server
 	private Bank bank = new Bank();
 	private ServerSocket s;
 	private Logger logger = Logger.getInstance();
-	Map<Integer, Function<Integer, Integer>> functions = new HashMap<>();
+	Map<Byte, Function<Long, Long>> functions = new HashMap<>();
 
 	public static Server createInstance()
 	{
@@ -56,7 +58,7 @@ public class Server
 
 	public Server handleData() throws IOException
 	{
-		Socket serverSocket;
+		Socket socket;
 		int i = 0;
 		int maxConnections = 200;
 
@@ -64,14 +66,13 @@ public class Server
 		// start a new thread to handle a request
 		while (i++ < maxConnections)
 		{
-			serverSocket = s.accept();
+			// Accept new data on the socket
+			socket = s.accept();
 
-			Handle serverDo = new Handle(serverSocket);
+			logger.info("Received incoming data, parsing instruction.");
+			Instruction instruction = InstructionParser.parseInstruction(socket.getInputStream());
 
-			Thread thread = new Thread(serverDo);
-			thread.start();
 
-			logger.info("Thread " + thread.getId() + " assigned to incoming request.");
 		}
 
 		return this;

@@ -5,8 +5,9 @@ import java.util.function.Function;
 
 public class Functions
 {
-	public static Map<Integer, Function<Integer, Integer>> getFunctions(Bank bank)
+	public static Map<Byte, Function<Long, Long>> getFunctions(Bank bank)
 	{
+
 		return null;
 	}
 }
