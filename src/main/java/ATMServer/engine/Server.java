@@ -1,5 +1,7 @@
 package ATMServer.engine;
 
+import ATMServer.ATM.Bank;
+import ATMServer.ATM.Functions;
 import ATMServer.util.Logger;
 
 import java.io.IOException;
@@ -8,16 +10,17 @@ import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 public class Server
 {
 	private String clientData;
+	private Bank bank = new Bank();
 	private ServerSocket s;
 	private Logger logger = Logger.getInstance();
-	List<Function<Integer, Integer>> functions = new ArrayList<>();
+	Map<Integer, Function<Integer, Integer>> functions = new HashMap<>();
 
 	public static Server createInstance()
 	{
@@ -46,7 +49,7 @@ public class Server
 
 	public Server registerHandlers()
 	{
-		// functions.add(integer -> null)
+		functions = Functions.getFunctions(bank);
 
 		return this;
 	}

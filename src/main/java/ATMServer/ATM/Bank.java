@@ -16,4 +16,7 @@ public class Bank
 		customers.put(1111222233334444L, new Account(500));
 		customers.put(9999999999999999L, new Account(7000));
 	}
+
+	public Map<Long, Account> getCustomers() { return customers; }
+	public Map<Byte, Long> getSessions() { return sessions; }
 }
