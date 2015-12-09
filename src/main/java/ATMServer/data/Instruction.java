@@ -2,9 +2,9 @@ package ATMServer.data;
 
 import java.nio.ByteBuffer;
 
-/// <summary>
-/// Represents a ten byte instruction for transmission over a network socket
-/// </summary>
+/**
+ * Represents a ten byte instruction for transmission over a network socket
+ */
 public class Instruction
 {
 	byte instruction;
@@ -12,9 +12,12 @@ public class Instruction
 	byte code;
 	byte identifier;
 
-	/// <summary>
-	/// Construct an instruction with only data
-	/// </summary>
+	/**
+	 * Construct an instruction with only data
+	 *
+	 * @param instruction       1 byte instruction
+	 * @param data              7 byte data
+	 */
 	public Instruction(byte instruction, long data)
 	{
 		this.instruction = instruction;
@@ -23,9 +26,13 @@ public class Instruction
 		identifier = 0;
 	}
 
-	/// <summary>
-	/// Construct a signed instruction with only data
-	/// </summary>
+	/**
+	 * Construct a signed instruction with only data
+	 *
+	 * @param instruction       1 byte instruction
+	 * @param data              7 byte data
+	 * @param identifier        1 byte ATM machine identifier
+	 */
 	public Instruction(byte instruction, long data, byte identifier)
 	{
 		this.instruction = instruction;
@@ -34,9 +41,14 @@ public class Instruction
 		this.identifier = identifier;
 	}
 
-	/// <summary>
-	/// Construct a signed instruction with data and security code
-	/// </summary>
+	/**
+	 * Construct a signed instruction using raw data and a security code
+	 *
+	 * @param instruction       1 byte instruction
+	 * @param data              7 byte data
+	 * @param code              1 byte security code
+	 * @param identifier        1 byte ATM machine identifier
+	 */
 	public Instruction(byte instruction, long data, byte code, byte identifier)
 	{
 		this.instruction = instruction;
