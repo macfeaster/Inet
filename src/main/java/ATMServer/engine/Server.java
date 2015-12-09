@@ -1,6 +1,5 @@
 package ATMServer.engine;
 
-import ATMServer.commands.Handle;
 import ATMServer.util.Logger;
 
 import java.io.IOException;
@@ -9,12 +8,16 @@ import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 public class Server
 {
 	private String clientData;
 	private ServerSocket s;
 	private Logger logger = Logger.getInstance();
+	List<Function<Integer, Integer>> functions = new ArrayList<>();
 
 	public static Server createInstance()
 	{
@@ -41,7 +44,14 @@ public class Server
 		return this;
 	}
 
-	public Server registerHandlers() throws IOException
+	public Server registerHandlers()
+	{
+		// functions.add(integer -> null)
+
+		return this;
+	}
+
+	public Server handleData() throws IOException
 	{
 		Socket serverSocket;
 		int i = 0;

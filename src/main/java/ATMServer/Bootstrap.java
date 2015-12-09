@@ -12,6 +12,6 @@ public class Bootstrap
 				.createInstance()
 				.readData()
 				.openConnection()
-				.registerHandlers();
+				.handleData();
 	}
 }
