@@ -1,6 +1,7 @@
 package ATMClient;
 
 import ATMClient.data.Command;
+import ATMClient.data.Language;
 import org.json.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -92,5 +93,27 @@ public class Parser {
         return map;
     }
 
-    
+    public static HashMap<String, Language> languages(String file) {
+        HashMap<String, Language> map = new HashMap<>();
+
+        JSONObject langs = new JSONObject(file);
+
+        while (langs.keys().hasNext()) {
+
+            // Retrieve the langKey
+            String langKey = langs.keys().next();
+
+            // Fetch language object
+            //
+            // Gretchen, stop trying to make fetch happen!
+            // It's not going to happen!
+            //
+            JSONObject lang = langs.getJSONObject(langKey);
+
+            // Put lang in map
+            map.put(langKey, new Language(lang.getString("name"), lang.getString("available")));
+        }
+
+        return map;
+    }
 }
