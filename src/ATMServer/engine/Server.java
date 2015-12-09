@@ -23,7 +23,7 @@ public class Server
 
 	public Server readData() throws IOException
 	{
-		Path p = Paths.get("inet.json");
+		Path p = Paths.get("resources/inet.json");
 
 		clientData = Files
 				.readAllLines(p)
@@ -43,7 +43,7 @@ public class Server
 
 	public Server registerHandlers() throws IOException
 	{
-		Socket server;
+		Socket serverSocket;
 		int i = 0;
 		int maxConnections = 200;
 
@@ -51,9 +51,9 @@ public class Server
 		// start a new thread to handle a request
 		while (i++ < maxConnections)
 		{
-			server = s.accept();
+			serverSocket = s.accept();
 
-			Handle serverDo = new Handle(server);
+			Handle serverDo = new Handle(serverSocket);
 
 			Thread thread = new Thread(serverDo);
 			thread.start();

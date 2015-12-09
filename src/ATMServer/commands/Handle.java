@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.util.Arrays;
 
 /**
  * Created by mauritz on 12/9/15.
@@ -32,27 +33,30 @@ public class Handle implements Runnable
 	{
 		try
 		{
-			// Set up variables to receive incoming data
-			String line;
-			BufferedReader in = new BufferedReader(
-					new InputStreamReader(server.getInputStream()));
-
 			// Set up a Stream to provide a response to a client
 			PrintStream out = new PrintStream(server.getOutputStream());
 
 			// As long as request data is received, assign a new Worker
 			// to it, and send back a response
-			while ((line = in.readLine()) != null)
-			{
-				logger.info(line);
 
-				out.println("Received!");
+			byte[] command = new byte[10];
+
+			int res = server.getInputStream().read(command);
+
+			// If the number of bytes received was not exactly ten,
+			// we have received malformed input
+			if (res != 0)
+			{
+				logger.error("Malformed bytes received: " + res + " bytes - " + Arrays.toString(command));
+				return;
 			}
+
+			out.println("Received!");
 		}
 		catch (IOException e)
 		{
 			// Log server errors
-			logger.log("IOException in ServerDo.java: " + e.getMessage());
+			logger.log("IOException in Handle.java: " + e.getMessage());
 		}
 	}
 }
