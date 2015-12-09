@@ -34,11 +34,6 @@ public class Server
 		return this;
 	}
 
-	public Server parseData()
-	{
-		return this;
-	}
-
 	public Server openConnection() throws IOException
 	{
 		s = new ServerSocket(2178);
