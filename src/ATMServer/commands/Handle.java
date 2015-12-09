@@ -1,18 +1,12 @@
 package ATMServer.commands;
 
 import ATMServer.util.Logger;
-import sun.rmi.runtime.Log;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Arrays;
 
-/**
- * Created by mauritz on 12/9/15.
- */
 public class Handle implements Runnable
 {
 	// registerHandler(byte command, Callable x, long input, byte code, byte identifier)
