@@ -173,27 +173,27 @@
         },
         {
             "id": 101,
-            "en-US": "Your account contains ${0}.00",
-            "sv-SE": "Ditt kontosaldo: {0} riksdaler. FÖR SVERIGE I TIDEN.",
-            "sk-SU": "Deu haur {0} spettekaukour i spaurbyssen."
+            "en-US": "Your account contains $%s.00",
+            "sv-SE": "Ditt kontosaldo: %s riksdaler. FÖR SVERIGE I TIDEN.",
+            "sk-SU": "Deu haur %s spettekaukour i spaurbyssen."
         },
         {
             "id": 102,
-            "en-US": "Withdrawal successful! Your account now contains ${0}.00",
-            "sv-SE": "Uttag utfört. Ditt saldo är nu {0} riksdaler.",
-            "sk-SU": "Nu haur däu foutt dine spettekaukour. Däu haur {0} kvaur. "
+            "en-US": "Withdrawal successful! Your account now contains $%s.00",
+            "sv-SE": "Uttag utfört. Ditt saldo är nu %s riksdaler.",
+            "sk-SU": "Nu haur däu foutt dine spettekaukour. Däu haur %s kvaur. "
         },
         {
             "id": 103,
-            "en-US": "Deposit successful! Your account now contains ${0}.00",
-            "sv-SE": "Insättning utförd. Ditt saldo är nu {0} riksdaler.",
-            "sk-SU": "Dåu var deit klarrt! Deu haur {0} spettekaukour."
+            "en-US": "Deposit successful! Your account now contains $%s.00",
+            "sv-SE": "Insättning utförd. Ditt saldo är nu %s riksdaler.",
+            "sk-SU": "Dåu var deit klarrt! Deu haur %s spettekaukour."
         },
         {
             "id": 104,
-            "en-US": "Stock market changes today: -{0}%",
-            "sv-SE": "Dagens börsresultat: -{0}%. Göran Greider förutspår undergången till nästa torsdag. Läs mer på Aftonbladet Plus.",
-            "sk-SU": "Däitte haur hint meid daugens spettekake-preiser: {0} pærør"
+            "en-US": "Stock market changes today: -%s \\%",
+            "sv-SE": "Dagens börsresultat: -%s %. Göran Greider förutspår undergången till nästa torsdag. Läs mer på Aftonbladet Plus.",
+            "sk-SU": "Däitte haur hint meid daugens spettekake-preiser: %s pærør"
         }
     ]
 }
