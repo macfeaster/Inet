@@ -88,7 +88,7 @@ public class Instruction
 		byte[] raw = buffer.array();
 		byte[] res = new byte[7];
 
-		System.arraycopy(raw, 0, res, 1, 7);
+		System.arraycopy(raw, 1, res, 0, 7);
 
 		return res;
 	}
