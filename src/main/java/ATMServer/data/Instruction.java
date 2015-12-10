@@ -101,18 +101,9 @@ public class Instruction
 		return buffer.getLong();
 	}
 
-	public byte getCode()
-	{
-		return code;
-	}
-
-	public byte getIdentifier()
-	{
-		return identifier;
-	}
-
-	public long getData()
-	{
-		return bytesToLong(data);
-	}
+	public byte getCode() { return code; }
+	public byte getIdentifier() { return identifier; }
+	public long getData() { return bytesToLong(data); }
+	public byte[] getRawData() { return data; }
+	public byte getCommand() { return command; }
 }
