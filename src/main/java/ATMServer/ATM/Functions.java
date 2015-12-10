@@ -22,6 +22,11 @@ public class Functions
 		functions.put((byte) 1, instr -> {
 			Account acc = bank.getCustomer(instr.getData());
 
+			if (acc == null) {
+				// If account doesn't exist, send an invalid card number response (81 invalid ccn)
+				return new Instruction(((byte) 81));
+			}
+
 			if (acc.validateCode(instr.getCode())) {
 				// Open session and return success Instruction
 				bank.getSessions().put(instr.getIdentifier(), instr.getData());
