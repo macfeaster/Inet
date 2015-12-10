@@ -32,17 +32,13 @@ public class Parser {
             // Construct a command JSON object
             JSONObject command = (JSONObject) c;  // cast to JSONObject
 	        logger.debug(command);
-            int id = 0;
+	        int id = command.getInt("id");
 
 	        for (String langKey : command.keySet())
 	        {
 		        // If language map has not yet been instantiated, do so
 		        if (langKey.equals("id"))
-		        {
-			        logger.debug("Found command with ID " + command.getInt(langKey));
-			        id = command.getInt(langKey);
 			        continue;
-		        }
 
 		        JSONObject langVal = command.getJSONObject(langKey);
 		        logger.debug("LangVal: " + langVal);
@@ -80,15 +76,13 @@ public class Parser {
             JSONObject response = (JSONObject) r;
             logger.debug(response);
 
-            for (String langKey : response.keySet()) {
+	        int id = response.getInt("id");
 
-                int id = 0;
+	        for (String langKey : response.keySet()) {
+
                 // Special parse case for "id"
-                if (langKey.equals("id")) {
-                    id = response.getInt(langKey);
-                    logger.debug("Found command with ID " + id);
-                    continue;
-                }
+                if (langKey.equals("id"))
+	                continue;
 
                 // If language map has not yet been instantiated, do so
                 if (!map.containsKey(langKey)) {

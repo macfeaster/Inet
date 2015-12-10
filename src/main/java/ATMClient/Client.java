@@ -145,16 +145,30 @@ public class Client
                     code = scanner.nextByte();
                 }
 
+	            Instruction instr = new Instruction(cmd, data, code, identifier);
+	            logger.debug("Sent instruction:");
+	            logger.debug(instr.toString());
 
 				out.write(cmd);
 				out.write(data);
 				out.write(code);
 				out.write(identifier);
 
-	            logger.debug("Available bytes: " + in.available());
-
 				Instruction instruction = InstructionParser.parseInstruction(in);
 
+	            logger.debug("Received instruction:");
+	            logger.debug(instruction);
+
+	            String responseString = responses.get(selectedLanguage).get((int) instruction.getCode());
+
+	            if (responseString == null)
+		            logger.debug("ResponseString is null");
+
+	            if (instruction == null)
+		            logger.error("instruction is null");
+
+	            System.out.printf(responseString,
+			            instruction.getData());
             }
 
         }
