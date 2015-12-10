@@ -38,6 +38,16 @@ public class Account
 	}
 
 	/**
+	 * Get the Account balance.
+	 *
+	 * @return          Balance as long
+	 */
+	public long getBalance()
+	{
+		return (long) balance;
+	}
+
+	/**
 	 * Makes a withdrawal from the user's account. Returns -1 if the withdrawal fails.
 	 *
 	 * @param amount        Amount to withdraw

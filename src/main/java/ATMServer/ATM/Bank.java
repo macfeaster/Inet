@@ -21,6 +21,20 @@ public class Bank
 		return customers.getOrDefault(creditCard, null);
 	}
 
+	public Account getLoggedInAccount(byte identifier) {
+
+		// If there is a session
+		if (sessions.containsKey(identifier)) {
+			// With a customer connected who has an Account
+			long creditCard = sessions.get(identifier);
+
+			// Return the Account object
+			return customers.getOrDefault(creditCard, null);
+		} else
+			return null;
+
+	}
+
 	public Map<Long, Account> getCustomers() { return customers; }
 	public Map<Byte, Long> getSessions() { return sessions; }
 }
