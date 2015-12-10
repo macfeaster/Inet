@@ -1,4 +1,4 @@
-package ATMServer.util;
+package common;
 
 import common.Instruction;
 

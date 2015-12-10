@@ -4,7 +4,7 @@ import common.Writer;
 import ATMServer.ATM.Bank;
 import ATMServer.ATM.Functions;
 import common.Instruction;
-import ATMServer.util.InstructionParser;
+import common.InstructionParser;
 import common.Logger;
 
 import java.io.IOException;
