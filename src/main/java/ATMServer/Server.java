@@ -75,14 +75,14 @@ public class Server
 			Instruction instruction = InstructionParser.parseInstruction(socket.getInputStream());
 			logger.debug("Parsed instruction: " + instruction);
 
-			if (functions.containsKey(instruction.getCode())) {
-				Function<Instruction, Instruction> func = functions.get(instruction.getCode());
+			if (functions.containsKey(instruction.getCommand())) {
+				Function<Instruction, Instruction> func = functions.get(instruction.getCommand());
 
 				Instruction response = func.apply(instruction);
 				logger.debug("Sending response " + response);
 			} else {
 
-				switch (instruction.getCode()) {
+				switch (instruction.getCommand()) {
 					case 0:
 						logger.debug("Boot data requested");
 						socket.getOutputStream().write(clientData.getBytes());
@@ -93,7 +93,6 @@ public class Server
 						logger.error("Unknown function requested: " + instruction.getCode());
 						Writer.write(new Instruction((byte) 80), socket.getOutputStream());
 				}
-
 
 			}
 
