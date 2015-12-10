@@ -7,6 +7,7 @@ public class Bootstrap
 		Client.createInstance()
 				.initConnection(args)
 				.getJSON()
-				.parseJSON();
+				.parseJSON()
+				.work();
 	}
 }

@@ -2,6 +2,7 @@ package ATMClient;
 
 import ATMClient.data.Command;
 import ATMClient.data.Language;
+import common.InstructionParser;
 import common.Writer;
 import common.Instruction;
 import common.Logger;
@@ -97,7 +98,7 @@ public class Client
         else selectedLanguage = "sk-SU"; // set default language
     }
 
-    public Client work() throws IOException {
+    public Client work() throws Exception {
 
         boolean activeSession = true;
 
@@ -129,7 +130,7 @@ public class Client
                     byte[] raw = buffer.array();
                     data = new byte[7];
 
-                    System.arraycopy(raw, 0, data, 1, 7);
+                    System.arraycopy(raw, 1, data, 0, 7);
 
                 }
 
@@ -137,6 +138,13 @@ public class Client
                     System.out.println(command.getCode());
                     code = (byte) scanner.nextInt();
                 }
+
+				out.write(cmd);
+				out.write(data);
+				out.write(code);
+				out.write(identifier);
+
+				Instruction instruction = InstructionParser.parseInstruction(in);
 
 
 

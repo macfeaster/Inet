@@ -85,8 +85,8 @@ public class Parser {
                 int id = 0;
                 // Special parse case for "id"
                 if (langKey.equals("id")) {
-                    logger.debug("Found command with ID " + response.getInt(langKey));
                     id = response.getInt(langKey);
+                    logger.debug("Found command with ID " + id);
                     continue;
                 }
 
@@ -108,10 +108,9 @@ public class Parser {
         // langs is JSONObject containing each lang as object
         JSONObject langs = new JSONObject(file).getJSONObject("languages");
 
-        while (langs.keys().hasNext()) {
+        logger.debug(langs);
 
-            // Retrieve the langKey
-            String langKey = langs.keys().next();
+        for (String langKey : langs.keySet()) {
 
             // Fetch language object
             //
