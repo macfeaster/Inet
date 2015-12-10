@@ -1,10 +1,11 @@
 package ATMServer;
 
+import common.Writer;
 import ATMServer.ATM.Bank;
 import ATMServer.ATM.Functions;
-import ATMServer.data.Instruction;
+import common.Instruction;
 import ATMServer.util.InstructionParser;
-import ATMServer.util.Logger;
+import common.Logger;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -80,7 +81,18 @@ public class Server
 				Instruction response = func.apply(instruction);
 				logger.debug("Sending response " + response);
 			} else {
-				logger.error("Unknown function requested: " + instruction.getCode());
+
+				switch (instruction.getCode()) {
+					case 0:
+						socket.getOutputStream().write(clientData.getBytes());
+						break;
+
+					default:
+						logger.error("Unknown function requested: " + instruction.getCode());
+						Writer.write(new Instruction((byte) 80), socket.getOutputStream());
+				}
+
+
 			}
 		}
 

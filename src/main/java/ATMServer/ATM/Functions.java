@@ -1,7 +1,7 @@
 package ATMServer.ATM;
 
 import ATMServer.data.Account;
-import ATMServer.data.Instruction;
+import common.Instruction;
 
 import java.util.HashMap;
 import java.util.Map;

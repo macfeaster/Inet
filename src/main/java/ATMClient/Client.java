@@ -1,8 +1,8 @@
 package ATMClient;
 
-import ATMClient.util.Writer;
-import ATMServer.data.Instruction;
-import ATMServer.util.Logger;
+import common.Writer;
+import common.Instruction;
+import common.Logger;
 
 import java.io.*;
 import java.net.Socket;
