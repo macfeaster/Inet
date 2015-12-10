@@ -2,10 +2,10 @@ package ATMClient;
 
 public class Bootstrap
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws Exception
 	{
 		Client.createInstance()
-				.initConnection()
+				.initConnection(args)
 				.getJSON()
 				.parseJSON();
 	}
