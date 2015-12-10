@@ -17,6 +17,11 @@ public class Client
 	OutputStream out;
 	String rawJSON;
 	Logger logger = Logger.getInstance();
+	Map<String, Map<String, Command>> commands;
+	Map<String, Map<Integer, String>> responses;
+	Map<String, Language> languages;
+	String selectedLanguage;
+
 
 	public static Client createInstance() {
 		return new Client();
@@ -48,16 +53,37 @@ public class Client
 
 		logger.debug("Received JSON of length " + rawJSON.length());
 
-
-		Map<String, Map<String, Command>> commands = Parser.commands(rawJSON);
+		commands = Parser.commands(rawJSON);
 		logger.debug("Finished parsing commands JSON");
 
-		Map<String, Map<Integer, String>> responses = Parser.responses(rawJSON);
+		responses = Parser.responses(rawJSON);
 		logger.debug("Finished parsing responses JSON");
 
-		Map<String, Language> languages = Parser.languages(rawJSON);
+		languages = Parser.languages(rawJSON);
 		logger.debug("Finished parsing languages JSON");
 
 		return this;
 	}
+
+	private void printAvailableCommands() {
+
+		System.out.println(languages.get(selectedLanguage).getAvailable());
+
+		for(String c : commands.get(selectedLanguage).keySet()) {
+			System.out.println("(" + c + ") " + commands.get(selectedLanguage).get(c).getHelp());
+		}
+		System.out.println();
+
+	}
+
+	private void printAvailableLanguages() {
+
+		System.out.println("Available languages");
+
+		for (String l : languages.keySet()) {
+			System.out.println("(" + l + ") " + languages.get(l));
+		}
+		System.out.println();
+	}
+
 }

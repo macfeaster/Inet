@@ -79,15 +79,14 @@ public class Parser {
         for(Object r : responses) {
             JSONObject response = (JSONObject) r;
 
-            while (response.keys().hasNext()) {
-
-                // Retrieve the langKey
-                String langKey = response.keys().next();
+            for (String langKey : response.keySet()) {
 
                 int id = 0;
                 // Special parse case for "id"
-                if (langKey.equals("id"))
+                if (langKey.equals("id")) {
                     id = response.getInt(langKey);
+                    continue;
+                }
 
                 // If language map has not yet been instantiated, do so
                 if (!map.containsKey(langKey)) {
