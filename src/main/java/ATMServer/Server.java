@@ -22,7 +22,7 @@ public class Server
 	private Bank bank = new Bank();
 	private ServerSocket s;
 	private Logger logger = Logger.getInstance();
-	Map<Byte, Function<Long, Long>> functions = new HashMap<>();
+	Map<Byte, Function<Instruction, Instruction>> functions = new HashMap<>();
 
 	public static Server createInstance()
 	{
@@ -45,6 +45,7 @@ public class Server
 	public Server openConnection() throws IOException
 	{
 		s = new ServerSocket(2178);
+		logger.info("Server now listening on port 2178");
 
 		return this;
 	}
@@ -69,10 +70,18 @@ public class Server
 			// Accept new data on the socket
 			socket = s.accept();
 
-			logger.info("Received incoming data, parsing instruction.");
+			logger.debug("Received incoming data, parsing instruction.");
 			Instruction instruction = InstructionParser.parseInstruction(socket.getInputStream());
+			logger.debug("Parsed instruction: " + instruction);
 
+			if (functions.containsKey(instruction.getCode())) {
+				Function<Instruction, Instruction> func = functions.get(instruction.getCode());
 
+				Instruction response = func.apply(instruction);
+				logger.debug("Sending response " + response);
+			} else {
+				logger.error("Unknown function requested: " + instruction.getCode());
+			}
 		}
 
 		return this;
