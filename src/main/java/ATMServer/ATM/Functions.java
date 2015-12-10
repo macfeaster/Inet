@@ -83,6 +83,26 @@ public class Functions
 			return new Instruction((byte) 102, res);
 		});
 
+		/**
+		 * Handle #5 (deposit)
+		 */
+		functions.put((byte) 5, instruction -> {
+			Account acc = bank.getLoggedInAccount(instruction.getIdentifier());
+
+			if (acc == null)
+				return new Instruction((byte) 80);
+
+			long res = acc.withdraw(instruction.getData());
+
+			return new Instruction((byte) 103, res);
+		});
+
+		/**
+		 * Handle #6 (stock)
+		 * Always down 6%
+		 */
+		functions.put((byte) 6, instruction -> new Instruction((byte) 104, 6));
+
 		return functions;
 	}
 }
