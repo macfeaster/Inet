@@ -20,6 +20,7 @@ public class Client
 	Map<String, Map<String, Command>> commands;
 	Map<String, Map<Integer, String>> responses;
 	Map<String, Language> languages;
+	String selectedLanguage;
 
 
 	public static Client createInstance() {
@@ -66,12 +67,26 @@ public class Client
 
 	private void printAvailableCommands() {
 
+		System.out.println(languages.get(selectedLanguage).getAvailable());
+
+		for(String c : commands.get(selectedLanguage).keySet()) {
+
+			System.out.println("(" + c + ") " + commands.get(selectedLanguage).get(c).getHelp());
+
+		}
+
 	}
 
 	private void printAvailableLanguages() {
+
 		System.out.println("Available languages");
+
 		for (String l : languages.keySet()) {
+
 			System.out.println("(" + l + ") " + languages.get(l));
+
 		}
 	}
+
+
 }
