@@ -5,6 +5,7 @@ import ATMClient.data.Language;
 import org.json.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Parser {
 
@@ -96,7 +97,8 @@ public class Parser {
     public static Map<String, Language> languages(String file) {
         Map<String, Language> map = new HashMap<>();
 
-        JSONObject langs = new JSONObject(file);
+        // langs is JSONObject containing each lang as object
+        JSONObject langs = new JSONObject(file).getJSONObject("languages");
 
         while (langs.keys().hasNext()) {
 
