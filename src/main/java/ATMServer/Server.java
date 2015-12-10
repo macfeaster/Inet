@@ -84,7 +84,9 @@ public class Server
 
 				switch (instruction.getCode()) {
 					case 0:
+						logger.debug("Boot data requested");
 						socket.getOutputStream().write(clientData.getBytes());
+						logger.debug("Finished pushing JSON data to client");
 						break;
 
 					default:
@@ -94,6 +96,8 @@ public class Server
 
 
 			}
+
+			socket.close();
 		}
 
 		return this;

@@ -42,7 +42,7 @@ public class Client
 
 	public Client parseJSON() {
 
-		logger.debug(rawJSON);
+		logger.debug("Received JSON of length " + rawJSON.length());
 
 		return this;
 	}
