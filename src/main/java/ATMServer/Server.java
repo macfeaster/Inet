@@ -60,7 +60,7 @@ public class Server
 
 	public Server handleData() throws IOException
 	{
-		Socket socket;
+		Socket clientConnection;
 		int i = 0;
 		int maxConnections = 200;
 
@@ -68,35 +68,14 @@ public class Server
 		// start a new thread to handle a request
 		while (i++ < maxConnections)
 		{
-			// Accept new data on the socket
-			socket = s.accept();
+			// Create a new Socket instance for *one* connection between a client and the server
+			clientConnection = s.accept();
 
-			logger.debug("Received incoming data, parsing instruction.");
-			Instruction instruction = InstructionParser.parseInstruction(socket.getInputStream());
-			logger.debug("Parsed instruction: " + instruction);
+			Worker worker = new Worker(clientConnection, functions, clientData);
 
-			if (functions.containsKey(instruction.getCommand())) {
-				Function<Instruction, Instruction> func = functions.get(instruction.getCommand());
-
-				Instruction response = func.apply(instruction);
-				logger.debug("Sending response " + response);
-			} else {
-
-				switch (instruction.getCommand()) {
-					case 0:
-						logger.debug("Boot data requested");
-						socket.getOutputStream().write(clientData.getBytes());
-						logger.debug("Finished pushing JSON data to client");
-						break;
-
-					default:
-						logger.error("Unknown function requested: " + instruction.getCode());
-						Writer.write(new Instruction((byte) 80), socket.getOutputStream());
-				}
-
-			}
-
-			socket.close();
+			Thread t = new Thread(worker);
+			t.run();
+			logger.debug("New client connected, assigned thread ID #" + t.getId());
 		}
 
 		return this;

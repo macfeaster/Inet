@@ -2,10 +2,10 @@ package ATMClient;
 
 import ATMClient.data.Command;
 import ATMClient.data.Language;
-import common.InstructionParser;
-import common.Writer;
 import common.Instruction;
+import common.InstructionParser;
 import common.Logger;
+import common.Writer;
 
 import java.io.*;
 import java.net.Socket;
@@ -47,15 +47,21 @@ public class Client
 		Instruction boot = new Instruction((byte) 0);
 		Writer.write(boot, out);
 
+		logger.debug("Wrote boot command to server");
+
 		BufferedReader r = new BufferedReader(new InputStreamReader(in));
+		logger.debug(r.ready());
 		rawJSON = r.readLine();
+		logger.debug("lololol");
+
+
+		logger.debug("Received JSON of length " + rawJSON.length());
 
 		return this;
 	}
 
 	public Client parseJSON() {
 
-		logger.debug("Received JSON of length " + rawJSON.length());
 
 		commands = Parser.commands(rawJSON);
 		logger.debug("Finished parsing commands JSON");
@@ -136,17 +142,18 @@ public class Client
 
                 if (command.getCode() != null) {
                     System.out.println(command.getCode());
-                    code = (byte) scanner.nextInt();
+                    code = scanner.nextByte();
                 }
+
 
 				out.write(cmd);
 				out.write(data);
 				out.write(code);
 				out.write(identifier);
 
+	            logger.debug("Available bytes: " + in.available());
+
 				Instruction instruction = InstructionParser.parseInstruction(in);
-
-
 
             }
 
