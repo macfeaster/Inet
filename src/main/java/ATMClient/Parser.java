@@ -78,12 +78,14 @@ public class Parser {
 
         for(Object r : responses) {
             JSONObject response = (JSONObject) r;
+            logger.debug(response);
 
             for (String langKey : response.keySet()) {
 
                 int id = 0;
                 // Special parse case for "id"
                 if (langKey.equals("id")) {
+                    logger.debug("Found command with ID " + response.getInt(langKey));
                     id = response.getInt(langKey);
                     continue;
                 }
