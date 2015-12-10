@@ -33,6 +33,11 @@ public class Logger
 		return instance;
 	}
 
+	public Logger debug(Object message) {
+		debug(message.toString());
+		return this;
+	}
+
 	public Logger log(String message)
 	{
 		log(message, Type.LOG);
