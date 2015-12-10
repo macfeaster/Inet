@@ -41,8 +41,9 @@ public class Parser {
                 if (langKey.equals("id")) continue;
 
                 // If language map has not yet been instantiated, do so
-                if (!rootMap.containsKey(langKey)) {
-                    rootMap.put(langKey, new HashMap<>());
+                if (langKey.equals("id")) {
+                    id = command.getInt(langKey);
+                    continue;
                 }
 
                 // Get object with keys (for example "name": "login")
@@ -52,7 +53,7 @@ public class Parser {
                 rootMap.get(langKey).
                         put(keys.getString("name"),
                                 new Command(
-                                        keys.getInt("id"),
+                                        id,
                                         keys.getString("name"),
                                         keys.getString("help"),
                                         keys.getString("data"),
@@ -79,8 +80,12 @@ public class Parser {
                 // Retrieve the langKey
                 String langKey = response.keys().next();
 
+                int id;
                 // Special parse case for "id"
-                if (langKey.equals("id")) continue;
+                if (langKey.equals("id")) {
+                    id = response.getInt(langKey);
+                    continue;
+                }
 
                 // If language map has not yet been instantiated, do so
                 if (!map.containsKey(langKey)) {
@@ -88,7 +93,7 @@ public class Parser {
                 }
 
                 // Put response in map in map
-                map.get(langKey).put(response.getInt("id"), response.getString("text"));
+                map.get(langKey).put(id, response.getString("text"));
             }
         }
         return map;
