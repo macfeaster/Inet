@@ -2,12 +2,14 @@ package ATMClient;
 
 import ATMClient.data.Command;
 import ATMClient.data.Language;
+import common.Logger;
 import org.json.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Parser {
+
+	static Logger logger = Logger.getInstance();
 
     /**
      * Parses JSON file into Map containing all available commands
@@ -21,45 +23,47 @@ public class Parser {
         // Map containing all the root command maps for each language
         Map<String, Map<String, Command>> rootMap = new HashMap<>();
 
-       // commands contains each command as JSON object
+        // The command object contains each command as JSON object
         JSONArray commands = new JSONObject(file).getJSONArray("commands");
 
-      // for each command in array
+	    // For each command in array
         for (Object c : commands) {
 
             // Construct a command JSON object
             JSONObject command = (JSONObject) c;  // cast to JSONObject
-            int id;
+	        logger.debug(command);
+            int id = 0;
 
-           // Parse all language options
-            while (command.keys().hasNext()) {
+	        for (String langKey : command.keySet())
+	        {
+		        // If language map has not yet been instantiated, do so
+		        if (langKey.equals("id"))
+		        {
+			        logger.debug("Found command with ID " + command.getInt(langKey));
+			        id = command.getInt(langKey);
+			        continue;
+		        }
 
-                // Retrieve the langKey
-                String langKey = command.keys().next();
+		        JSONObject langVal = command.getJSONObject(langKey);
+		        logger.debug("LangVal: " + langVal);
 
-                // Special parse case for "id"
-                if (langKey.equals("id")) continue;
+		        logger.debug(langVal);
+		        logger.debug(langVal.get("name"));
 
-                // If language map has not yet been instantiated, do so
-                if (langKey.equals("id")) {
-                    id = command.getInt(langKey);
-                    continue;
-                }
+		        // If language map has not yet been instantiated, do so
+		        if (!rootMap.containsKey(langKey))
+			        rootMap.put(langKey, new HashMap<>());
 
-                // Get object with keys (for example "name": "login")
-                JSONObject keys = command.getJSONObject(langKey);
-
-                // Put sad bundle of instructions in sad HashMap
-                rootMap.get(langKey).
-                        put(keys.getString("name"),
-                                new Command(
-                                        id,
-                                        keys.getString("name"),
-                                        keys.getString("help"),
-                                        keys.getString("data"),
-                                        keys.getString("code")));
-
-            }
+		        // Put sad bundle of instructions in sad HashMap
+			        rootMap.get(langKey).
+					        put(langVal.getString("name"),
+							        new Command(
+									        id,
+									        langVal.getString("name"),
+									        langVal.getString("help"),
+									        langVal.optString("data", null),
+									        langVal.optString("code", null)));
+	        }
         }
         return rootMap;
     }
@@ -80,12 +84,10 @@ public class Parser {
                 // Retrieve the langKey
                 String langKey = response.keys().next();
 
-                int id;
+                int id = 0;
                 // Special parse case for "id"
-                if (langKey.equals("id")) {
+                if (langKey.equals("id"))
                     id = response.getInt(langKey);
-                    continue;
-                }
 
                 // If language map has not yet been instantiated, do so
                 if (!map.containsKey(langKey)) {

@@ -48,11 +48,15 @@ public class Client
 
 		logger.debug("Received JSON of length " + rawJSON.length());
 
-		Map<String, Language> languages = Parser.languages(rawJSON);
-		Map<String, Map<String, Command>> commands = Parser.commands(rawJSON);
-		Map<String, Map<Integer, String>> responses = Parser.responses(rawJSON);
 
-		logger.debug("Finished parsing JSON");
+		Map<String, Map<String, Command>> commands = Parser.commands(rawJSON);
+		logger.debug("Finished parsing commands JSON");
+
+		Map<String, Map<Integer, String>> responses = Parser.responses(rawJSON);
+		logger.debug("Finished parsing responses JSON");
+
+		Map<String, Language> languages = Parser.languages(rawJSON);
+		logger.debug("Finished parsing languages JSON");
 
 		return this;
 	}
