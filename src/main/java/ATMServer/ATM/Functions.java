@@ -66,6 +66,23 @@ public class Functions
 			return new Instruction((byte) 101, acc.getBalance());
 		});
 
+		/**
+		 * Handle #4 (withdraw)
+		 */
+		functions.put((byte) 4, instruction -> {
+			Account acc = bank.getLoggedInAccount(instruction.getIdentifier());
+
+			if (acc == null)
+				return new Instruction((byte) 80);
+
+			long res = acc.withdraw(instruction.getData());
+
+			if (res == -1)
+				return new Instruction((byte) 83);
+
+			return new Instruction((byte) 102, res);
+		});
+
 		return functions;
 	}
 }

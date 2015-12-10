@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class Account
 {
 	private LinkedList<Integer> securityCode;
-	private int balance;
+	private long balance;
 
 	public Account(int balance)
 	{
@@ -44,7 +44,7 @@ public class Account
 	 */
 	public long getBalance()
 	{
-		return (long) balance;
+		return balance;
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class Account
 	 * @param amount        Amount to withdraw
 	 * @return              -1 if the user has insufficient funds, new balance otherwise
 	 */
-	public int withdraw(int amount) {
+	public long withdraw(long amount) {
 		if (balance - amount >= 0)
 		{
 			balance = balance - amount;
@@ -68,7 +68,7 @@ public class Account
 	 * @param amount        Amount to deposit
 	 * @return              New account balance
 	 */
-	public int deposit(int amount) {
+	public long deposit(int amount) {
 		balance += amount;
 		return balance;
 	}
