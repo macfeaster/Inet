@@ -25,6 +25,12 @@ public class InstructionParser
 		if (res != 1)
 			throw new IOException("Malformed bytes received: " + res + " bytes - " + Arrays.toString(command));
 
+		return parseInstruction(command[0], stream);
+	}
+
+	public static Instruction parseInstruction(byte command, InputStream stream) throws IOException {
+		int res;
+
 		// Receive 7 data bytes
 		byte[] data = new byte[7];
 		res = stream.read(data);
@@ -43,6 +49,6 @@ public class InstructionParser
 		if (res != 1)
 			throw new IOException("Malformed bytes received: " + res + " bytes - " + Arrays.toString(identifier));
 
-		return new Instruction(command[0], data, code[0], identifier[0]);
+		return new Instruction(command, data, code[0], identifier[0]);
 	}
 }

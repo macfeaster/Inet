@@ -1,6 +1,7 @@
 package common;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 /**
  * Represents a ten byte command for transmission over a network socket
@@ -106,4 +107,15 @@ public class Instruction
 	public long getData() { return bytesToLong(data); }
 	public byte[] getRawData() { return data; }
 	public byte getCommand() { return command; }
+
+	@Override
+	public String toString()
+	{
+		return "Instruction{" +
+				"command=" + command +
+				", data=" + Arrays.toString(data) +
+				", code=" + code +
+				", identifier=" + identifier +
+				'}';
+	}
 }
