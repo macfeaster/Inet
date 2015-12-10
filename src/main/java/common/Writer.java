@@ -1,6 +1,4 @@
-package ATMClient.util;
-
-import ATMServer.data.Instruction;
+package common;
 
 import java.io.IOException;
 import java.io.OutputStream;

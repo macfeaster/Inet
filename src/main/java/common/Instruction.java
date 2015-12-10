@@ -1,4 +1,4 @@
-package ATMServer.data;
+package common;
 
 import java.nio.ByteBuffer;
 
