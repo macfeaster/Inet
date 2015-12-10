@@ -70,7 +70,7 @@ public class Parser {
 
     public static Map<String, Map<Integer, String>> responses(String file) {
 
-        // Map containing all the root command maps for each language
+        // Map containing all the root response maps for each language
         Map<String, Map<Integer, String>> map = new HashMap<>();
 
         // responses contains each response object
@@ -95,7 +95,7 @@ public class Parser {
                 }
 
                 // Put response in map in map
-                map.get(langKey).put(id, response.getString("text"));
+                map.get(langKey).put(id, response.getString(langKey));
             }
         }
         return map;
