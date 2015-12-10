@@ -70,10 +70,9 @@ public class Client
 		System.out.println(languages.get(selectedLanguage).getAvailable());
 
 		for(String c : commands.get(selectedLanguage).keySet()) {
-
 			System.out.println("(" + c + ") " + commands.get(selectedLanguage).get(c).getHelp());
-
 		}
+		System.out.println();
 
 	}
 
@@ -82,11 +81,9 @@ public class Client
 		System.out.println("Available languages");
 
 		for (String l : languages.keySet()) {
-
 			System.out.println("(" + l + ") " + languages.get(l));
-
 		}
+		System.out.println();
 	}
-
 
 }
