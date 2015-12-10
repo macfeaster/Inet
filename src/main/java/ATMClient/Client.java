@@ -52,6 +52,8 @@ public class Client
 		Map<String, Map<String, Command>> commands = Parser.commands(rawJSON);
 		Map<String, Map<Integer, String>> responses = Parser.responses(rawJSON);
 
+		logger.debug("Finished parsing JSON");
+
 		return this;
 	}
 }
