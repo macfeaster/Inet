@@ -8,8 +8,9 @@ import common.Logger;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.HashMap;
+import java.nio.ByteBuffer;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Client
 {
@@ -21,7 +22,7 @@ public class Client
 	Map<String, Map<Integer, String>> responses;
 	Map<String, Language> languages;
 	String selectedLanguage;
-
+    Scanner scanner;
 
 	public static Client createInstance() {
 		return new Client();
@@ -33,6 +34,8 @@ public class Client
 
 		out = s.getOutputStream();
 		in = s.getInputStream();
+
+        scanner = new Scanner(System.in);
 
 		return this;
 	}
@@ -85,5 +88,62 @@ public class Client
 		}
 		System.out.println();
 	}
+
+    private void selectLanguage() {
+
+        String input = scanner.nextLine();
+
+        if (languages.containsKey(input)) selectedLanguage = input;
+        else selectedLanguage = "sk-SU"; // set default language
+    }
+
+    public Client work() throws IOException {
+
+        boolean activeSession = true;
+
+        // select language
+        printAvailableLanguages();
+        selectLanguage();
+
+        while (activeSession) {
+
+            printAvailableCommands();
+
+            // take input from user
+            String input = scanner.nextLine();
+
+            Command command = commands.get(selectedLanguage).getOrDefault(input, null);
+
+            if (command != null) {
+                byte cmd = (byte) command.getId();
+                byte[] data = new byte[7];
+                byte code = (byte) 0;
+                byte identifier = (byte) 0;
+
+                if (command.getData() != null) {
+                    System.out.println(command.getData());
+
+                    ByteBuffer buffer = ByteBuffer.allocate(8);
+                    buffer.putLong(scanner.nextLong());
+
+                    byte[] raw = buffer.array();
+                    data = new byte[7];
+
+                    System.arraycopy(raw, 0, data, 1, 7);
+
+                }
+
+                if (command.getCode() != null) {
+                    System.out.println(command.getCode());
+                    code = (byte) scanner.nextInt();
+                }
+
+
+
+            }
+
+        }
+        return this;
+    }
 
 }
