@@ -1,11 +1,15 @@
 package ATMClient;
 
+import ATMClient.data.Command;
+import ATMClient.data.Language;
 import common.Writer;
 import common.Instruction;
 import common.Logger;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Client
 {
@@ -43,6 +47,10 @@ public class Client
 	public Client parseJSON() {
 
 		logger.debug("Received JSON of length " + rawJSON.length());
+
+		Map<String, Language> languages = Parser.languages(rawJSON);
+		Map<String, Map<String, Command>> commands = Parser.commands(rawJSON);
+		Map<String, Map<Integer, String>> responses = Parser.responses(rawJSON);
 
 		return this;
 	}

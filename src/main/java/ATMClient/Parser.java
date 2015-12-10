@@ -15,10 +15,10 @@ public class Parser {
      * @return Map with key language and value Map
      * with key name and val command
      */
-    public static HashMap<String, HashMap<String, Command>> commands(String file) {
+    public static Map<String, Map<String, Command>> commands(String file) {
 
         // Map containing all the root command maps for each language
-        HashMap<String, HashMap<String, Command>> rootMap = new HashMap<>();
+        Map<String, Map<String, Command>> rootMap = new HashMap<>();
 
        // commands contains each command as JSON object
         JSONArray commands = new JSONObject(file).getJSONArray("commands");
@@ -62,10 +62,10 @@ public class Parser {
         return rootMap;
     }
 
-    public static HashMap<String, HashMap<Integer, String>> responses(String file) {
+    public static Map<String, Map<Integer, String>> responses(String file) {
 
         // Map containing all the root command maps for each language
-        HashMap<String, HashMap<Integer, String>> map = new HashMap<>();
+        Map<String, Map<Integer, String>> map = new HashMap<>();
 
         // responses contains each response object
         JSONArray responses = new JSONObject(file).getJSONArray("responses");
@@ -93,8 +93,8 @@ public class Parser {
         return map;
     }
 
-    public static HashMap<String, Language> languages(String file) {
-        HashMap<String, Language> map = new HashMap<>();
+    public static Map<String, Language> languages(String file) {
+        Map<String, Language> map = new HashMap<>();
 
         JSONObject langs = new JSONObject(file);
 
