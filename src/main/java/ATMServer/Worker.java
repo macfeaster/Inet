@@ -46,6 +46,7 @@ public class Worker implements Runnable
 					Function<Instruction, Instruction> func = functions.get(instruction.getCommand());
 
 					Instruction response = func.apply(instruction);
+					Writer.write(response, socket.getOutputStream());
 					logger.debug("Sending response " + response);
 				} else
 				{

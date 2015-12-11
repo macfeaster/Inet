@@ -154,20 +154,21 @@ public class Client
 				out.write(code);
 				out.write(identifier);
 
+	            logger.debug("Wrote instruction");
+
 				Instruction instruction = InstructionParser.parseInstruction(in);
 
 	            logger.debug("Received instruction:");
 	            logger.debug(instruction);
 
-	            String responseString = responses.get(selectedLanguage).get((int) instruction.getCode());
+	            String responseString = responses.get(selectedLanguage).get((int) instruction.getCommand());
 
-	            if (responseString == null)
-		            logger.debug("ResponseString is null");
+	            if (responseString == null) {
+		            logger.error("Server sent invalid response.");
+		            System.exit(-1);
+	            }
 
-	            if (instruction == null)
-		            logger.error("instruction is null");
-
-	            System.out.printf(responseString,
+	            System.out.printf(responseString + "\n",
 			            instruction.getData());
             }
 

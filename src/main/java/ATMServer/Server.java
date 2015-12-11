@@ -60,7 +60,6 @@ public class Server
 
 	public Server handleData() throws IOException
 	{
-		Socket clientConnection;
 		int i = 0;
 		int maxConnections = 200;
 
@@ -69,13 +68,13 @@ public class Server
 		while (i++ < maxConnections)
 		{
 			// Create a new Socket instance for *one* connection between a client and the server
-			clientConnection = s.accept();
+			Socket clientConnection = s.accept();
 
 			Worker worker = new Worker(clientConnection, functions, clientData);
 
 			Thread t = new Thread(worker);
-			t.run();
-			logger.debug("New client connected, assigned thread ID #" + t.getId());
+			t.start();
+			logger.info("New client connected, assigned thread ID #" + t.getId());
 		}
 
 		return this;
