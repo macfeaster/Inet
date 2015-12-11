@@ -65,10 +65,12 @@ public class Worker implements Runnable
 							logger.debug("Identifier requested");
 							Writer.write(new Instruction((byte) 70, (long) this.id), socket.getOutputStream());
 							logger.debug("Sent identifier ID " + this.id);
+							break;
 
 						default:
-							logger.error("Unknown function requested: " + instruction.getCode());
+							logger.error("Unknown function requested: " + instruction.getCommand());
 							Writer.write(new Instruction((byte) 80), socket.getOutputStream());
+							break;
 					}
 				}
 			}
