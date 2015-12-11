@@ -152,9 +152,6 @@ public class Client
 				out.write(identifier);
 
 				Instruction instruction = InstructionParser.parseInstruction(in);
-
-	            System.out.println(instruction);
-
 	            String responseString = responses.get(selectedLanguage).get(instruction.getCommand());
 
 	            if (responseString == null) {
