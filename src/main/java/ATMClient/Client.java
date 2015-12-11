@@ -120,7 +120,7 @@ public class Client
                     System.out.print(command.getData() + "> ");
 
                     ByteBuffer buffer = ByteBuffer.allocate(8);
-                    buffer.putLong(scanner.nextLong());
+                    buffer.putLong(Long.decode(scanner.nextLine()));
 
                     byte[] raw = buffer.array();
                     data = new byte[7];
