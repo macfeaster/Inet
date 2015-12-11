@@ -122,9 +122,9 @@
     "responses": [
         {
             "id": 80,
-            "en-US": "Invalid command sent to server",
-            "sv-SE": "Ogiltig förfrågan skickad till servern",
-            "sk-SU": "Nä neu fattarr einte dautan ett jeota!"
+            "en-US": "Login is required to use this feature",
+            "sv-SE": "Inloggning krävs för detta kommando",
+            "sk-SU": "Nä neu fattarr einte dautan ett jeota! Deu måst låg inn!"
         },
         {
             "id": 81,
