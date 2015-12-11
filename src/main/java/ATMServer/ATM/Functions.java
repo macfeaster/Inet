@@ -92,7 +92,7 @@ public class Functions
 			if (acc == null)
 				return new Instruction((byte) 80);
 
-			long res = acc.withdraw(instruction.getData());
+			long res = acc.deposit((int) instruction.getData());
 
 			return new Instruction((byte) 103, res);
 		});

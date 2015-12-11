@@ -47,57 +47,43 @@ public class Client
 		Instruction boot = new Instruction((byte) 0);
 		Writer.write(boot, out);
 
-		logger.debug("Wrote boot command to server");
-
+		// Get JSON response
 		BufferedReader r = new BufferedReader(new InputStreamReader(in));
-		logger.debug(r.ready());
 		rawJSON = r.readLine();
-		logger.debug("lololol");
-
-
-		logger.debug("Received JSON of length " + rawJSON.length());
 
 		return this;
 	}
 
 	public Client parseJSON() {
 
-
 		commands = Parser.commands(rawJSON);
-		logger.debug("Finished parsing commands JSON");
-
 		responses = Parser.responses(rawJSON);
-		logger.debug("Finished parsing responses JSON");
-
 		languages = Parser.languages(rawJSON);
-		logger.debug("Finished parsing languages JSON");
 
 		return this;
 	}
 
 	private void printAvailableCommands() {
 
-		System.out.println(languages.get(selectedLanguage).getAvailable());
+		// System.out.println(languages.get(selectedLanguage).getAvailable());
 
-		for(String c : commands.get(selectedLanguage).keySet()) {
-			System.out.println("(" + c + ") " + commands.get(selectedLanguage).get(c).getHelp());
-		}
-		System.out.println();
+		logger.debug(commands.get(selectedLanguage).keySet().size() + " commands");
 
+		commands.get(selectedLanguage)
+				.keySet()
+				.forEach(c -> System.out.println("(" + c + ") " + commands.get(selectedLanguage).get(c).getHelp()));
 	}
 
 	private void printAvailableLanguages() {
 
 		System.out.println("Available languages");
 
-		for (String l : languages.keySet()) {
-			System.out.println("(" + l + ") " + languages.get(l));
-		}
-		System.out.println();
+		languages.keySet().forEach(l -> System.out.println("(" + l + ") " + languages.get(l)));
 	}
 
     private void selectLanguage() {
 
+	    System.out.print("> ");
         String input = scanner.nextLine();
 
         if (languages.containsKey(input)) selectedLanguage = input;
@@ -119,6 +105,9 @@ public class Client
             // take input from user
             String input = scanner.nextLine();
 
+	        System.out.println("LOL FOUND NEW LINE");
+	        System.out.println(input.length());
+
             Command command = commands.get(selectedLanguage).getOrDefault(input, null);
 
             if (command != null) {
@@ -127,8 +116,8 @@ public class Client
                 byte code = (byte) 0;
                 byte identifier = (byte) 0;
 
-                if (command.getData() != null) {
-                    System.out.println(command.getData());
+                if (command.getData() != null && !command.getData().equals("false")) {
+                    System.out.print(command.getData() + "> ");
 
                     ByteBuffer buffer = ByteBuffer.allocate(8);
                     buffer.putLong(scanner.nextLong());
@@ -140,26 +129,18 @@ public class Client
 
                 }
 
-                if (command.getCode() != null) {
-                    System.out.println(command.getCode());
+                if (command.getCode() != null && !command.getCode().equals("false")) {
+	                System.out.print(command.getCode() + "> ");
                     code = scanner.nextByte();
+	                scanner.nextLine();
                 }
-
-	            Instruction instr = new Instruction(cmd, data, code, identifier);
-	            logger.debug("Sent instruction:");
-	            logger.debug(instr.toString());
 
 				out.write(cmd);
 				out.write(data);
 				out.write(code);
 				out.write(identifier);
 
-	            logger.debug("Wrote instruction");
-
 				Instruction instruction = InstructionParser.parseInstruction(in);
-
-	            logger.debug("Received instruction:");
-	            logger.debug(instruction);
 
 	            String responseString = responses.get(selectedLanguage).get((int) instruction.getCommand());
 

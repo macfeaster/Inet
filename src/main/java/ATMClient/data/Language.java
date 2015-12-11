@@ -22,4 +22,10 @@ public class Language {
     public String getAvailable() {
         return available;
     }
+
+    @Override
+    public String toString()
+    {
+        return name;
+    }
 }
