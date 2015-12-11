@@ -62,6 +62,7 @@ public class Server
 	{
 		int i = 0;
 		int maxConnections = 200;
+		byte id = 1;
 
 		// Unless we've reached the max number of simultaneous connections,
 		// start a new thread to handle a request
@@ -69,8 +70,9 @@ public class Server
 		{
 			// Create a new Socket instance for *one* connection between a client and the server
 			Socket clientConnection = s.accept();
+			id++;
 
-			Worker worker = new Worker(clientConnection, functions, clientData);
+			Worker worker = new Worker(clientConnection, functions, clientData, id);
 
 			Thread t = new Thread(worker);
 			t.start();

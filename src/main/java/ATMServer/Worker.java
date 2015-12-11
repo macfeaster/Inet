@@ -16,12 +16,14 @@ public class Worker implements Runnable
 	Map<Byte, Function<Instruction, Instruction>> functions;
 	Socket socket;
 	String clientData;
+	byte id;
 
-	public Worker(Socket socket, Map<Byte, Function<Instruction, Instruction>> functions, String clientData)
+	public Worker(Socket socket, Map<Byte, Function<Instruction, Instruction>> functions, String clientData, byte id)
 	{
 		this.functions = functions;
 		this.socket = socket;
 		this.clientData = clientData;
+		this.id = id;
 	}
 
 	@Override
@@ -58,6 +60,11 @@ public class Worker implements Runnable
 							socket.getOutputStream().write((int) '\n');
 							logger.debug("Finished pushing JSON data to client");
 							break;
+
+						case 6:
+							logger.debug("Identifier requested");
+							Writer.write(new Instruction((byte) 70, (long) this.id), socket.getOutputStream());
+							logger.debug("Sent identifier ID " + this.id);
 
 						default:
 							logger.error("Unknown function requested: " + instruction.getCode());

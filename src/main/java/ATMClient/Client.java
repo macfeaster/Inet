@@ -24,6 +24,7 @@ public class Client
 	Map<String, Language> languages;
 	String selectedLanguage;
     Scanner scanner;
+	byte id;
 
 	public static Client createInstance() {
 		return new Client();
@@ -59,6 +60,19 @@ public class Client
 		commands = Parser.commands(rawJSON);
 		responses = Parser.responses(rawJSON);
 		languages = Parser.languages(rawJSON);
+
+		return this;
+	}
+
+	public Client getIdentifier() throws IOException {
+
+		Writer.write(new Instruction((byte) 6), out);
+
+		Instruction identifier = InstructionParser.parseInstruction(in);
+
+		this.id = (byte) identifier.getData();
+
+		logger.debug("Set ID to " + this.id);
 
 		return this;
 	}
@@ -114,7 +128,7 @@ public class Client
                 byte cmd = (byte) command.getId();
                 byte[] data = new byte[7];
                 byte code = (byte) 0;
-                byte identifier = (byte) 0;
+                byte identifier = this.id;
 
                 if (command.getData() != null && !command.getData().equals("false")) {
                     System.out.print(command.getData() + "> ");
@@ -148,6 +162,8 @@ public class Client
 		            logger.error("Server sent invalid response.");
 		            System.exit(-1);
 	            }
+
+	            System.out.println(responseString);
 
 	            System.out.printf(responseString + "\n",
 			            instruction.getData());

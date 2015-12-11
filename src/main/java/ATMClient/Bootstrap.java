@@ -8,6 +8,7 @@ public class Bootstrap
 				.initConnection(args)
 				.getJSON()
 				.parseJSON()
+				.getIdentifier()
 				.work();
 	}
 }

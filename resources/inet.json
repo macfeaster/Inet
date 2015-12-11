@@ -118,27 +118,6 @@
                 "help": "Laegg ei peingar ei spaurbyssen",
                 "code": false
             }
-        },
-        {
-            "id": 6,
-            "en-US": {
-                "name": "stock",
-                "help": "View today's stock market result",
-                "data": false,
-                "code": false
-            },
-            "sv-SE": {
-                "name": "börsen",
-                "help": "Se dagens börsresultat",
-                "data": false,
-                "code": false
-            },
-            "sk-SU": {
-                "name": "spettekake",
-                "help": "Titte peo daugens spettekake-preiser",
-                "data": false,
-                "code": false
-            }
         }],
     "responses": [
         {
@@ -188,12 +167,5 @@
             "en-US": "Deposit successful! Your account now contains $%s.00",
             "sv-SE": "Insättning utförd. Ditt saldo är nu %s riksdaler.",
             "sk-SU": "Dåu var deit klarrt! Deu haur %s spettekaukour."
-        },
-        {
-            "id": 104,
-            "en-US": "Stock market changes today: -%s \\%",
-            "sv-SE": "Dagens börsresultat: -%s %. Göran Greider förutspår undergången till nästa torsdag. Läs mer på Aftonbladet Plus.",
-            "sk-SU": "Däitte haur hint meid daugens spettekake-preiser: %s pærør"
-        }
-    ]
+        }]
 }
