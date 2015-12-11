@@ -20,7 +20,7 @@ public class Client
 	String rawJSON;
 	Logger logger = Logger.getInstance();
 	Map<String, Map<String, Command>> commands;
-	Map<String, Map<Integer, String>> responses;
+	Map<String, Map<Byte, String>> responses;
 	Map<String, Language> languages;
 	String selectedLanguage;
     Scanner scanner;
@@ -72,7 +72,7 @@ public class Client
 
 		this.id = (byte) identifier.getData();
 
-		logger.debug("Set ID to " + this.id);
+		// logger.debug("Set ID to " + this.id);
 
 		return this;
 	}
@@ -81,7 +81,7 @@ public class Client
 
 		// System.out.println(languages.get(selectedLanguage).getAvailable());
 
-		logger.debug(commands.get(selectedLanguage).keySet().size() + " commands");
+		// logger.debug(commands.get(selectedLanguage).keySet().size() + " commands");
 
 		commands.get(selectedLanguage)
 				.keySet()
@@ -119,9 +119,6 @@ public class Client
             // take input from user
             String input = scanner.nextLine();
 
-	        System.out.println("LOL FOUND NEW LINE");
-	        System.out.println(input.length());
-
             Command command = commands.get(selectedLanguage).getOrDefault(input, null);
 
             if (command != null) {
@@ -156,14 +153,14 @@ public class Client
 
 				Instruction instruction = InstructionParser.parseInstruction(in);
 
-	            String responseString = responses.get(selectedLanguage).get((int) instruction.getCommand());
+	            System.out.println(instruction);
+
+	            String responseString = responses.get(selectedLanguage).get(instruction.getCommand());
 
 	            if (responseString == null) {
 		            logger.error("Server sent invalid response.");
 		            System.exit(-1);
 	            }
-
-	            System.out.println(responseString);
 
 	            System.out.printf(responseString + "\n",
 			            instruction.getData());

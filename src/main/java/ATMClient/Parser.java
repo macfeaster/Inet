@@ -64,10 +64,10 @@ public class Parser {
         return rootMap;
     }
 
-    public static Map<String, Map<Integer, String>> responses(String file) {
+    public static Map<String, Map<Byte, String>> responses(String file) {
 
         // Map containing all the root response maps for each language
-        Map<String, Map<Integer, String>> map = new HashMap<>();
+        Map<String, Map<Byte, String>> map = new HashMap<>();
 
         // responses contains each response object
         JSONArray responses = new JSONObject(file).getJSONArray("responses");
@@ -76,7 +76,7 @@ public class Parser {
             JSONObject response = (JSONObject) r;
             // logger.debug(response);
 
-	        int id = response.getInt("id");
+	        byte id = (byte) response.getInt("id");
 
 	        for (String langKey : response.keySet()) {
 
